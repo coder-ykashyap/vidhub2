@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="urlInput">Enter URL:</label>
+    <input type="text" id="urlInput">
+    <button onclick="makeRequest()">Request</button>
+
+
+    <script>
+
+        const makeRequest = async () => {
+
+            let reel = encodeURIComponent(document.getElementById("urlInput").value);
+
+            if (reel) {
+
+
+                const url = `https://instagram-post-and-reels-downloader.p.rapidapi.com/insta/?url=${reel}`;
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'X-RapidAPI-Key': 'c16f347345mshbaacf00e69f29bdp1c4394jsne5c3e9e8795d',
+                        'X-RapidAPI-Host': 'instagram-post-and-reels-downloader.p.rapidapi.com'
+                    }
+                };
+
+                try {
+                    const response = await fetch(url, options);
+                    const result = await response.json();
+                    console.log(result);
+                    try{
+                        let link = result.detail.data.items[0].urls[0].urlDownloadable
+                        download(link)
+                    }
+                    catch (error) {
+                    console.error(error);
+                    document.body.innerHTML = error
+                }
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+
+            }
+
+        }
+
+
+       const download = (dlink)=>{
+        let dbtn = document.createElement("a")
+        dbtn.textContent = "Download"
+        dbtn.href = dlink
+        dbtn.download = "true"
+        document.body.append(dbtn)
+       }
+        
+        
+
+    </script>
+</body>
+
+</html>
