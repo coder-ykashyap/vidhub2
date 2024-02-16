@@ -85,8 +85,8 @@
     <script>
         
 const makeRequest = async () => {
-    // let reel = encodeURIComponent(document.getElementById("urlInput").value);
-    let reel = encodeURIComponent("https://www.instagram.com/reel/C2h5CUWpppd/?igsh=NjZiM2M3MzIxNA==")
+    let reel = encodeURIComponent(document.getElementById("urlInput").value);
+    // let reel = encodeURIComponent("https://www.instagram.com/reel/C2h5CUWpppd/?igsh=NjZiM2M3MzIxNA==")
 
     if (reel) {
         const url = `https://instagram-post-reels-stories-downloader.p.rapidapi.com/instagram/?url=${reel}`;
