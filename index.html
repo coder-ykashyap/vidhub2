@@ -89,36 +89,50 @@
             // let reel = encodeURIComponent("https://www.instagram.com/reel/C2h5CUWpppd/?igsh=NjZiM2M3MzIxNA==")
 
             if (reel) {
-                const url = `https://fb-video-reels.p.rapidapi.com/smvd/get/all?url=${reel}`;
+                const url = 'https://instagram-downloader36.p.rapidapi.com/instagram?insta_url=' + reel;
                 const options = {
                     method: 'GET',
                     headers: {
                         'x-rapidapi-key': 'c16f347345mshbaacf00e69f29bdp1c4394jsne5c3e9e8795d',
-                        'x-rapidapi-host': 'fb-video-reels.p.rapidapi.com'
+                        'x-rapidapi-host': 'instagram-downloader36.p.rapidapi.com'
                     }
                 };
 
                 try {
                     const response = await fetch(url, options);
                     const result = await response.json();
-                    console.log(result);
-                    const downloadLink = result.links[1].link;
-                    displayDownloadLink(downloadLink)
+
+                    if (!result.status) {
+                        alert("No Video Found !");
+                        return;
+                    }
+
+                    // const downloadLink = result?.media_url;
+                    const downloadLink = result.urls[0].download_url;
+                    // displayDownloadLink(downloadLink);
+
+                    window.location.href = downloadLink;
+
+                    // document.getElementById("dlink").click();
+
                     console.log(result);
                 } catch (error) {
-                    console.log(error.message);
+                    console.error(error);
                 }
             }
         }
 
 
-        const displayDownloadLink = (dlink) => {
-            let downloadLink = document.getElementById("downloadLink");
-            downloadLink.textContent = "Download";
-            downloadLink.href = dlink;
-            downloadLink.download = "true";
-            downloadLink.style.display = "block";
-        }
+
+
+        // const displayDownloadLink = (dlink) => {
+        //     let downloadLink = document.getElementById("downloadLink");
+        //     downloadLink.textContent = "Download";
+        //     // downloadLink.id = "dlink"
+        //     downloadLink.href = dlink;
+        //     downloadLink.download;
+        //     downloadLink.style.display = "block";
+        // }
 
 
     </script>
